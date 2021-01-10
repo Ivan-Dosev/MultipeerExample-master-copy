@@ -19,8 +19,6 @@ extension Device {
 	func send(text: String) throws {
         let message1 = text.data(using: .utf16)!
         let data = try! crypto.encrypt(message1, to: crypto.one.receiverEncryptionPublicKey, signedBy: crypto.one.senderSigningKey)
-//        let message = Message(body: text)
-//        let payload = try JSONEncoder().encode(message)
 		try self.session?.send(data, toPeers: [self.peerID], with: .reliable)
 	}
 }
